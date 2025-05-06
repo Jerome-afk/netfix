@@ -1,0 +1,76 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div class="jumbotron p-5 mb-4 bg-light rounded-3">
+        <div class="container py-5">
+            <h1 class="display-4">Welcome to Netfix</h1>
+            <p class="lead">The one-stop solution for all your home service needs!</p>
+            <hr class="my-4">
+            <p>From fixing your bidet to painting your walls, find professional services for all your home needs.</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'service-list' %}" role="button">Explore Services</a>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>Recently Added Services</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        {% if recent_services %}
+            {% for service in recent_services %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">{{ service.name }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ service.description|truncatechars:100 }}</p>
+                            <p><strong>Category:</strong> {{ service.field }}</p>
+                            <p><strong>Price:</strong> ${{ service.price_per_hour }}/hour</p>
+                            <p><strong>Provider:</strong> {{ service.company.user.username }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'service-detail' service.id %}" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center">No services available yet.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-tools fa-3x mb-3 text-primary"></i>
+                    <h3 class="card-title">Quality Services</h3>
+                    <p class="card-text">Our platform connects you with skilled professionals for every home service need.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-hand-holding-usd fa-3x mb-3 text-success"></i>
+                    <h3 class="card-title">Transparent Pricing</h3>
+                    <p class="card-text">Clear hourly rates with no hidden charges. Pay only for the time you need.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-user-check fa-3x mb-3 text-info"></i>
+                    <h3 class="card-title">Verified Companies</h3>
+                    <p class="card-text">All service providers are verified to ensure quality and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
