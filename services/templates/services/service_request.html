@@ -1,0 +1,85 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">Request Service: {{ service.name }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5>Service Details:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Service:</strong> {{ service.name }}</li>
+                            <li class="list-group-item"><strong>Category:</strong> {{ service.field }}</li>
+                            <li class="list-group-item"><strong>Provider:</strong> {{ service.company.user.username }}</li>
+                            <li class="list-group-item"><strong>Price per Hour:</strong> ${{ service.price_per_hour }}</li>
+                        </ul>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <div class="mb-3">
+                                <label for="{{ form.address.id_for_label }}" class="form-label">Service Address</label>
+                                {{ form.address|add_class:"form-control" }}
+                                {% if form.address.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.address.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <small class="form-text text-muted">Enter the address where you need this service.</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.service_time.id_for_label }}" class="form-label">Service Hours</label>
+                                {{ form.service_time|add_class:"form-control" }}
+                                {% if form.service_time.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.service_time.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <small class="form-text text-muted">How many hours do you need the service for?</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Estimated Cost</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="text" class="form-control" id="estimated_cost" value="{{ service.price_per_hour }}" readonly>
+                                </div>
+                                <small class="form-text text-muted">Based on the hourly rate and service hours</small>
+                            </div>
+                        </fieldset>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">Confirm Request</button>
+                            <a href="{% url 'service-detail' service.id %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calculate estimated cost based on service hours
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceTimeInput = document.getElementById('id_service_time');
+            const estimatedCostInput = document.getElementById('estimated_cost');
+            const pricePerHour = {{ service.price_per_hour }};
+            
+            if (serviceTimeInput && estimatedCostInput) {
+                serviceTimeInput.addEventListener('input', function() {
+                    const hours = parseInt(this.value) || 1;
+                    const totalCost = (hours * pricePerHour).toFixed(2);
+                    estimatedCostInput.value = totalCost;
+                });
+            }
+        });
+    </script>
+{% endblock content %}
