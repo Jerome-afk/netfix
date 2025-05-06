@@ -1,0 +1,138 @@
+/* Global Styles */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Card Styles */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+}
+
+.card-header {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Home page styles */
+.jumbotron {
+  background-image: linear-gradient(to right, #4e73df, #224abe);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Page Styles */
+.profile-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4e73df;
+}
+
+.profile-info {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Service List Styles */
+.service-card {
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Form Styles */
+.form-control:focus, .form-select:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.btn-primary {
+  background-color: #4e73df;
+  border-color: #4e73df;
+}
+
+.btn-primary:hover {
+  background-color: #2e59d9;
+  border-color: #2653d4;
+}
+
+.btn-success {
+  background-color: #1cc88a;
+  border-color: #1cc88a;
+}
+
+.btn-success:hover {
+  background-color: #17a673;
+  border-color: #169b6b;
+}
+
+/* Footer Styles */
+footer {
+  margin-top: 40px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .jumbotron {
+      padding: 2rem 1rem;
+  }
+  
+  .card-deck .card {
+      margin-bottom: 20px;
+  }
+}
+
+/* Tab Navigation on Register Page */
+.nav-tabs .nav-link {
+  color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+  color: #4e73df;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Table styles */
+.table {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+  background-color: #f2f2f2;
+  border-bottom: 2px solid #dee2e6;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #4e73df;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #4e73df;
+  border-color: #4e73df;
+}
